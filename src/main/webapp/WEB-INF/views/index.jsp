@@ -13,6 +13,9 @@
 <body>
   <a href="/save-form">회원가입</a> <br>
   <a href="/login-form">로그인</a> <br>
-  <a href="/findAll">회원목록</a>
+  <a href="/findAll">회원목록</a>   <br>
+  로그인 회원 정보 : ${member} <br>
+  세션에 담은 memberId : ${sessionScope.id}    <br>
+  세션에 담은 id : ${sessionScope.loginId} <br>
 </body>
 </html>

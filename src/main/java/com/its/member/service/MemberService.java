@@ -30,4 +30,15 @@ public class MemberService {
         MemberDTO member = memberRepository.login(memberDTO);
         return member;
     }
+    public MemberDTO findById(Long id) {
+        return memberRepository.findById(id);
+    }
+
+    public MemberDTO delete(Long id) {
+        return memberRepository.delete(id);
+    }
+
+    public MemberDTO update(MemberDTO memberDTO) {
+        return memberRepository.update(memberDTO);
+    }
 }

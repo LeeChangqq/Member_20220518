@@ -13,5 +13,9 @@
 </head>
 <body>
     <h2>안녕</h2>
+    로그인 회원 정보 : ${member}   <br>
+    세션에 담은 memberId : ${sessionScope.id}    <br>
+    세션에 담은 id : ${sessionScope.loginId} <br>
+    <a href="/">index 이동</a>
 </body>
 </html>

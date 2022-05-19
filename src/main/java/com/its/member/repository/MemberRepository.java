@@ -22,4 +22,17 @@ public class MemberRepository {
     public MemberDTO login(MemberDTO memberDTO) {
         return sql.selectOne("Member.login", memberDTO);
     }
+    public MemberDTO findById(Long id) {
+        return sql.selectOne("Member.findById", id);
+    }
+
+    public MemberDTO delete(Long id) {
+            return sql.selectOne("Member.delete", id);
+    }
+
+
+
+    public MemberDTO update(MemberDTO memberDTO) {
+        return sql.selectOne("Member.update", memberDTO);
+    }
 }

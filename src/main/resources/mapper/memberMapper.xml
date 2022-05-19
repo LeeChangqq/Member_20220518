@@ -10,9 +10,18 @@
     <select id="findAll" resultType="member">
         select * from member_table
     </select>
-    <select id="login" resultType="member">
-        select * from member_table where id2= #{id2} and pass= #{pass};
+    <select id="login" resultType="member" parameterType="member">
+        select * from member_table where id2= #{id2} and pass= #{pass}
     </select>
+    <select id="findById" resultType="member" parameterType="Long">
+        select * from member_table where id= #{id}
+    </select>
+    <delete id="delete" parameterType="Long">
+        delete from member_table where id= #{id}
+    </delete>
+    <update id="update" parameterType="member">
+        update member_table set pass= #{pass} where id=#{id}
+    </update>
 </mapper>
 
 

@@ -1,5 +1,4 @@
 package com.its.member.controller;
-
 import com.its.member.dto.MemberDTO;
 import com.its.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +9,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
 public class MemberController {
     @Autowired
     MemberService memberService;
-    @GetMapping("/")
-    public String index() {
-        return "index";
-    }
+
     @GetMapping("/save-form")
     public String saveForm() {
         return "save-form";
@@ -28,7 +25,7 @@ public class MemberController {
     public String save(@ModelAttribute MemberDTO memberDTO) {
         boolean result = memberService.save(memberDTO);
         if(result) {
-            return "index";
+            return "login-form";
         }else {
             return "save-form";
         }
@@ -40,14 +37,17 @@ public class MemberController {
         return "login-form";
     }
     @PostMapping("/login")
-    public String login(@ModelAttribute MemberDTO memberDTO) {
+    public String login(@ModelAttribute MemberDTO memberDTO, Model model, HttpSession session) {
         MemberDTO member = memberService.login(memberDTO);
+        // 세션(session)
         if(member == null) {
             return "login-form";
         }else {
+            session.setAttribute("id", member.getId());
+            session.setAttribute("loginId", member.getId2());
+            model.addAttribute("member", member);
             return "main";
         }
-
     }
 
 
@@ -56,5 +56,29 @@ public class MemberController {
         List<MemberDTO> memberList = memberService.findAll();
         model.addAttribute("memberList", memberList);
         return "list";
+    }
+    @GetMapping("/detail")
+    public String findById(@RequestParam("id") Long id, Model model) {
+        MemberDTO memberDTO = memberService.findById(id);
+        model.addAttribute("member", memberDTO);
+        return "detail";
+    }
+    @GetMapping("/delete")
+    public String delete(@RequestParam("id") Long id, Model model) {
+        MemberDTO memberDTO = memberService.delete(id);
+        model.addAttribute("member", memberDTO);
+        return "index";
+    }
+    @GetMapping("/update-form")
+    public String updateForm() {
+        return "update-form";
+    }
+
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+        MemberDTO member = memberService.update(memberDTO);
+        session.setAttribute("member", member);
+        return "index";
     }
 }
