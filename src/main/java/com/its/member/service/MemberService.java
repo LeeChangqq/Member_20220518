@@ -34,11 +34,40 @@ public class MemberService {
         return memberRepository.findById(id);
     }
 
-    public MemberDTO delete(Long id) {
-        return memberRepository.delete(id);
+    public boolean delete(Long id) {
+        int result = memberRepository.delete(id);
+        if(result > 0) {
+            return true;
+        }else {
+            return false;
+        }
     }
 
-    public MemberDTO update(MemberDTO memberDTO) {
-        return memberRepository.update(memberDTO);
+    public boolean update(MemberDTO memberDTO) {
+        int result = memberRepository.update(memberDTO);
+        if(result > 0) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public String duplicateCheck(String id2) {
+        String result = memberRepository.duplicateCheck(id2);
+        if(result == null){
+            return "ok";
+        }else {
+            return "no";
+        }
+
+    }
+
+    public String idCheck(String id2) {
+        String result = memberRepository.idCheck(id2);
+        if(result == null) {
+            return "ok";
+        }else {
+            return "no";
+        }
     }
 }

@@ -26,13 +26,20 @@ public class MemberRepository {
         return sql.selectOne("Member.findById", id);
     }
 
-    public MemberDTO delete(Long id) {
-            return sql.selectOne("Member.delete", id);
+    public int delete(Long id) {
+            return sql.delete("Member.delete", id);
     }
 
 
+    public int update(MemberDTO memberDTO) {
+        return sql.update("Member.update", memberDTO);
+    }
 
-    public MemberDTO update(MemberDTO memberDTO) {
-        return sql.selectOne("Member.update", memberDTO);
+    public String duplicateCheck(String id2) {
+        return sql.selectOne("Member.duplicate", id2);
+    }
+
+    public String idCheck(String id2) {
+        return sql.selectOne("Member.idCheck", id2);
     }
 }

@@ -20,8 +20,14 @@
         delete from member_table where id= #{id}
     </delete>
     <update id="update" parameterType="member">
-        update member_table set pass= #{pass} where id=#{id}
+        update member_table set phone=#{phone} where id=#{id}
     </update>
+    <select id="duplicate" parameterType="String" resultType="String">
+        select id2 from member_table where id2=#{id2}
+    </select>
+    <select id="idCheck" parameterType="String" resultType="String">
+        select * from member_table where id2=#{id2}
+    </select>
 </mapper>
 
 
